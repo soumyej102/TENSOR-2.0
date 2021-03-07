@@ -1,5 +1,5 @@
 # TENSOR-2.0
 Team Members:
-VIDIP
-SOUMYE
-SUHAS TJ
+(1) VIDIP
+(2) SOUMYE
+(3) SUHAS TJ
