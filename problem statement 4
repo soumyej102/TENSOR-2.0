@@ -1,1 +1,40 @@
+import pandas as pd
+dataset = pd.read_csv("coroner's_inquests.csv")
 
+parish = dataset.iloc[:,1].values
+gend = dataset.iloc[:,5].values
+verd = dataset.iloc[:,6].values
+
+
+gender = gend.tolist()
+verdict = verd.tolist()
+
+count_f = 0
+count_m = 0
+for ii in range(len(gender)):
+    if gender[ii]=='f':
+        count_f = count_f+1
+    elif gender[ii]=='m':
+        count_m = count_m+1
+
+count_f_d = 0
+count_m_d = 0   
+for i in range(len(gender)):
+    if gender[i]=='f' and verdict[i]=='accidental':
+        count_f_d = count_f_d+1
+    elif gender[i]=='m' and verdict[i]=='accidental':
+        count_m_d = count_m_d+1
+
+percentage_f = (count_f_d/count_f)*100
+percentage_m = (count_m_d/count_m)*100
+
+percentage_f_r = round(percentage_f)
+percentage_m_r = round(percentage_m)
+
+print('male death percentage',percentage_m_r)
+print('female death percetage',percentage_f_r)
+
+parish_list = parish.tolist()
+parish_unique = set(parish_list)
+parish_unique = list(parish_unique)
+print(parish_unique)
