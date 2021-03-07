@@ -1,1 +1,38 @@
+import pandas as pd
+dataset = pd.read_csv('chess_games.csv')
+turn=dataset.iloc[:,4].values
+win=dataset.iloc[:,6].values
+whirat=dataset.iloc[:,9].values
+blarat=dataset.iloc[:,11].values
 
+turn_list = turn.tolist()
+win_list = win.tolist()
+whirat_list = whirat.tolist()
+blarat_list = blarat.tolist()
+
+low_rat_whi_win = 0
+low_rat_bla_win = 0
+turns_white = []
+turns_black = []
+
+for i in range(len(turn_list)):
+    if whirat_list[i]<blarat_list[i] and win_list[i] == 'white':
+        low_rat_whi_win += 1
+    if blarat_list[i]<whirat_list[i] and win_list[i] == 'black':
+        low_rat_bla_win += 1
+    if win_list[i] == 'white':
+        turns_white.append(turn[i])
+    if win_list[i] == 'black':
+        turns_black.append(turn[i])
+
+        
+percent_not_rounded = (low_rat_whi_win + low_rat_bla_win)/len(turn_list)
+percent_rounded = round(percent_not_rounded*100)
+
+print('\n(a)\nThe percentage of matches wherein a lower-rated player beats a higher-rated player is',percent_rounded,'%')
+
+avg_turns_white = round(sum(turns_white)/len(turns_white))
+avg_turns_black = round(sum(turns_black)/len(turns_black))
+
+print('\n(b)\n(i) The average number of turns in which White wins:',avg_turns_white)
+print('(ii) The average number of turns in which Black wins:',avg_turns_black)
