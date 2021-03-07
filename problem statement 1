@@ -1,1 +1,58 @@
+import pandas as pd
+dataset = pd.read_csv('seaice.csv')
+mon=dataset.iloc[:,1].values
+val=dataset.iloc[:,3].values
+hemi=dataset.iloc[:,6].values
 
+mon_list = mon.tolist()
+val_list = val.tolist()
+hemi_list = hemi.tolist()
+
+month = ['January','February','March','April','May','June','July','August','September','October','November','December']
+i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12 = [],[],[],[],[],[],[],[],[],[],[],[]
+c=[]
+
+for i in range(len(hemi_list)):
+    if hemi_list[i] == 'north' and mon_list[i] == 1:
+        i1.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 2:
+        i2.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 3:
+        i3.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 4:
+        i4.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 5:
+        i5.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 6:
+        i6.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 7:
+        i7.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 8:
+        i8.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 9:
+        i9.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 10:
+        i10.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 11:
+        i11.append(val_list[i])
+    if hemi_list[i] == 'north' and mon_list[i] == 12:
+        i12.append(val_list[i])
+        
+c.append(sum(i1))
+c.append(sum(i2))
+c.append(sum(i3))
+c.append(sum(i4))
+c.append(sum(i5))
+c.append(sum(i6))
+c.append(sum(i7))
+c.append(sum(i8))
+c.append(sum(i9))
+c.append(sum(i10))
+c.append(sum(i11))
+c.append(sum(i12))
+
+a = c.index(max(c))
+b = c.index(min(c))
+
+print('\n(a)\n(i) The maximum sea ice extent in northern hemisphere occurs in',month[a])
+print('(ii) The minimum sea ice extent in northern hemisphere occurs in',month[b])
