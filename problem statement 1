@@ -1,1 +1,47 @@
+import pandas as pd
+dataset = pd.read_csv("city_temperature.csv")
+r=dataset.iloc[:,0].values
+t=dataset.iloc[:,7].values
 
+s=set(r)
+l=len(s)
+print(s)
+Europe=[]
+Africa=[]
+Middle_East=[]
+Australia_South_Pacific=[]
+Asia=[]
+for i in range(0,len(r)):
+    if r[i]=='Europe':
+        Europe.append(t[i])
+    elif r[i]=='Africa':
+        Africa.append(t[i])
+    elif r[i]=='Middle East':
+        Middle_East.append(t[i])
+    elif r[i]=='Australia/South Pacific':
+        Australia_South_Pacific.append(t[i])
+    elif r[i]=='Asia':
+        Asia.append(t[i])
+
+print(len(Europe),len(Africa),len(Middle_East),len(Australia_South_Pacific),len(Asia))
+max_Europe=max(Europe)
+max_Africa=max(Africa)
+max_Middle_East=max(Middle_East)
+max_Australia_South_Pacific=max(Australia_South_Pacific)
+max_Asia=max(Asia)
+
+min_Europe=min(Europe)
+min_Africa=min(Africa)
+min_Middle_East=min(Middle_East)
+min_Australia_South_Pacific=min(Australia_South_Pacific)
+min_Asia=min(Asia)
+
+m_Europe=(max(Europe)-min(Europe))
+m_Africa=(max(Africa)-min(Africa))
+m_Middle_East=(max(Middle_East)-min(Middle_East))
+m_Australia_South_Pacific=(max(Australia_South_Pacific)-min(Australia_South_Pacific))
+m_Asia=(max(Asia)-min(Asia))
+
+total_t=(m_Europe+m_Africa+m_Middle_East+m_Australia_South_Pacific+m_Asia)/5
+total_t=round(total_t)
+print(total_t)
