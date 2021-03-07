@@ -1,1 +1,33 @@
+import pandas as pd
+from scipy.stats.stats import pearsonr
+import numpy as np
+dataset = pd.read_csv('movie_ratings.csv')
+hrs=dataset.iloc[:,0].values
+m_r=dataset.iloc[:,2].values
+a=dataset.iloc[:,1].values
+hrs_temp=[]
+m_r_temp=[]
+for i in range(0,len(a)):
+    if a[i]<=50:
+        hrs_temp.append(hrs[i])
+        m_r_temp.append(m_r[i])
+c1,p1=pearsonr(hrs_temp,m_r_temp)
+c1=round(c1,2)
+print(c1)
+hrs_temp2=[]
+m_r_temp2=[]
+for i in range(0,len(a)):
+    if a[i]>50:
+        hrs_temp2.append(hrs[i])
+        m_r_temp2.append(m_r[i])
+c2,p2=pearsonr(hrs_temp2,m_r_temp2)
+c2=round(c2,2)
+print(c2)
 
+cc1=np.corrcoef(hrs,m_r)
+cc1=round(cc1[0][1],2)
+print(cc1)
+
+cc2=np.corrcoef(a,m_r)
+cc2=round(cc2[0][1],2)
+print(cc2)
