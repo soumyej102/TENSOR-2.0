@@ -1,1 +1,63 @@
+import pandas as pd
+dataset = pd.read_csv('crimes.csv')
+state=dataset.iloc[:,0].values
+tot_crimes=dataset.iloc[:,18].values
+tml=dataset.iloc[:,-3].values
+tfl=dataset.iloc[:,-2].values
+#print(tml)
+#print(tfl)
+tms=sum(tml)
+tfs=sum(tfl)
+print(tms,tfs)
+ratio_tm_tf=tms/tfs
+ratio_tm_tf=round(ratio_tm_tf,2)
+print(ratio_tm_tf)
 
+ml_10=sum(dataset.iloc[:,4].values)
+ml_15=sum(dataset.iloc[:,6].values)
+ml_18=sum(dataset.iloc[:,8].values)
+ml_30=sum(dataset.iloc[:,10].values)
+ml_30t=ml_15+ml_18+ml_30
+print(ml_30t)
+
+fl_10=sum(dataset.iloc[:,5].values)
+fl_15=sum(dataset.iloc[:,7].values)
+fl_18=sum(dataset.iloc[:,9].values)
+fl_30=sum(dataset.iloc[:,11].values)
+fl_30t=fl_15+fl_18+fl_30
+print(fl_30)
+
+ratio_ml_fl_30=round(fl_30t/ml_30t,2)
+print(ratio_ml_fl_30)
+
+ml_above_30t=tms-ml_30t -ml_10
+fl_above_30t=tfs-fl_30t -fl_10
+ratio_ml_fl_above_30=round(fl_above_30t/ml_above_30t,2)
+print(ratio_ml_fl_above_30)
+
+state_list = state.tolist()
+
+state_ind = []
+for m in state_list:
+    if m not in state_ind:
+        state_ind.append(m)
+
+crime_tot = tot_crimes.tolist()
+
+print(state_ind)
+
+crimes=0
+a = {}
+for sta in state_ind:
+    for i in range(len(state_list)):
+        if state_list[i]==sta:
+            crimes+=crime_tot[i]
+        a[sta]=crimes
+print(a)
+b=[]
+for key,values in a.items():
+    b.append(values)
+g = max(b)
+for stat,vals in a.items():
+    if vals==g:
+        print(stat)
