@@ -1,1 +1,6 @@
-
+import pandas as pd
+dataset = pd.read_csv('jeopardy.csv')
+cat=dataset.iloc[:,2].values
+cat_l=cat.tolist()
+most_common_catagoary=max(cat, key = cat_l.count)
+print('The most common category is:',most_common_catagoary)
